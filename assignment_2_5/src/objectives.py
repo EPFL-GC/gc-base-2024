@@ -64,7 +64,7 @@ def regularization_neo_hookean(params_prev, solid, params, params_idx, harm_int)
     - energy    : the neo hookean energy
     '''
     
-    v_prev = solid.v_rest.detach()
+    v_prev = solid.v_rest.clone().detach()
     v_prev[params_idx, :] = params_prev.reshape(-1, 3)
     v_prev = harm_int.interpolate_fill(v_prev)
 
@@ -98,7 +98,7 @@ def regularization_grad_neo_hookean(params_prev, solid, params, params_idx, harm
     - grad_reg    : array of shape (3*#params,), the regularization gradient
     '''
 
-    v_prev = solid.v_rest.detach()
+    v_prev = solid.v_rest.clone().detach()
     v_prev[params_idx, :] = params_prev.reshape(-1, 3)
     v_prev = harm_int.interpolate_fill(v_prev)
 
